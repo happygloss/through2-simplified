@@ -1,18 +1,12 @@
 {
   "displayName": "Unit Tests",
   "rootDir": "./",
-  "moduleFileExtensions": [
-    "ts",
-    "js",
-    "json"
-  ],
+  "moduleFileExtensions": ["ts", "js", "json"],
   "transform": {
     "^.+\\.ts$": "ts-jest"
   },
   "testEnvironment": "node",
-  "testMatch": [
-    "<rootDir>/test/**/*.test.ts"
-  ],
+  "testMatch": ["<rootDir>/test/**/*.test.ts"],
   "globals": {
     "ts-jest": {
       "tsconfig": "./tsconfig.test.json"

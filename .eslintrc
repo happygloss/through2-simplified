@@ -1,17 +1,26 @@
 {
-  "parser": "@typescript/eslint-parser",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "tsconfigRootDir": "./",
+    "project": "./tsconfig.eslint.json"
+  },
   "env": {
-    "node": true
+    "node": true,
+    "jest": true,
+    "es6": true
   },
   "plugins": [
     "jsdoc",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "standard",
-    "plugin:jsdoc/recommended"
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:jsdoc/recommended",
+    "standard"
   ],
   "rules": {
     // some rules have equivalent typescript-eslint rules. the eslint
@@ -109,6 +118,12 @@
       }
     ],
     "no-array-constructor": "off",
+    "@typescript-eslint/no-explicit-any": [
+      "error",
+      {
+        "fixToUnknown": true
+      }
+    ],
     "@typescript-eslint/no-array-constructor": "error",
     "no-dupe-class-members": "off",
     "@typescript-eslint/no-dupe-class-members": "error",
@@ -156,10 +171,7 @@
       "never"
     ],
     "space-before-function-paren": "off",
-    "@typescript-eslint/space-before-function-paren": [
-      "error",
-      "always"
-    ],
+    "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/no-use-before-define": [
       "error",
       {
@@ -241,7 +253,6 @@
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-implied-eval": "error",
-    "@typescript-eslint/no-invalid-void-type": "error",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-namespace": "error",
@@ -313,10 +324,11 @@
       }
     ],
     "@typescript-eslint/type-annotation-spacing": "error",
-    "no-void": [
+    "no-void": "error",
+    "@typescript-eslint/no-invalid-void-type": [
       "error",
       {
-        "allowAsStatement": true
+        "allowAsThisParameter": true
       }
     ]
   }
