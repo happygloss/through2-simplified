@@ -41,8 +41,9 @@ jobs:
         with:
           node-version: '14'
           registry-url: 'https://npm.pkg.github.com'
-          cache: 'yarn'
-      
+      - name: Install all dependencies
+        run: yarn install --frozen-lockfile
+
       - name: Publish to Github Package Registry
         run: yarn publish
         env:
