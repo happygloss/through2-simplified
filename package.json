@@ -71,7 +71,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:vamsiampolu/through2-simplified.git"
+    "url": "git@github.com:happygloss/through2-simplified.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
