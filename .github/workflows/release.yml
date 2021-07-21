@@ -5,31 +5,31 @@ on:
     types: [created]  
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [12.x, 14.x, 16.x]
-        steps:
-          - uses: actions/checkout@v2
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v2
-            with:
-              node-version: ${{ matrix.node-version }}
-              cache: 'yarn'
-          
-          - name: Install Dependencies
-            run: yarn install --frozen-lockfile
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
 
-          - name: Lint Code
-            run: yarn lint
+      - name: Lint Code
+        run: yarn lint
 
-          - name: Run Tests
-            run: yarn test
+      - name: Run Tests
+        run: yarn test
 
-          - name: Build package
-            run: yarn build
-
+      - name: Build package
+        run: yarn build
+  
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
@@ -42,6 +42,7 @@ jobs:
           node-version: '14'
           registry-url: 'https://npm.pkg.github.com'
           cache: 'yarn'
+      
       - name: Publish to Github Package Registry
         run: yarn publish
         env:
