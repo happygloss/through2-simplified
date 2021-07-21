@@ -36,6 +36,26 @@ describe('Through2', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('noop using make', async () => {
+    const expected = 'eeee'
+    const stream = Through2.make()
+
+    stream.end(expected)
+
+    const [actual] = await streamToArray(stream)
+    expect(actual).toEqual(expected)
+  })
+
+  it('noop using obj', async () => {
+    const expected = { foo: 'bar' }
+    const stream = Through2.obj()
+
+    stream.end(expected)
+
+    const [actual] = await objectStreamToArray(stream)
+    expect(actual).toEqual(expected)
+  })
+
   it('Plain: receives a transform function and converts it to a string consisting of characters starting from a', async () => {
     const data = generateData()
     const expected = [

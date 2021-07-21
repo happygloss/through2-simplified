@@ -1,5 +1,11 @@
 import { describe, expect, it } from '@jest/globals'
-import { PassThrough, Readable, TransformCallback } from 'stream'
+import {
+  PassThrough,
+  Readable,
+  Transform,
+  TransformCallback,
+  TransformOptions
+} from 'stream'
 import Through2, { ctor, BufferEncoding } from '../src'
 import {
   ctorTransform,
@@ -174,10 +180,12 @@ describe('ctor', () => {
     const name = 'ThroughOverrideStream'
     const data = [{ in: 101 }, { in: 202 }, { in: -100 }]
     const expected = [{ out: 102 }, { out: 203 }, { out: -99 }]
-    const options = { objectMode: true }
+    const options: TransformOptions = { objectMode: true }
 
-    const ThroughOverrideStream = ctor(name, transformObj)
-    const stream = new ThroughOverrideStream(options)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+    const ThroughOverrideStream = ctor(name, transformObj) as any
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const stream = new ThroughOverrideStream(options) as Transform
 
     writeArrayToStream(data, stream)
     stream.end()
@@ -215,10 +223,12 @@ describe('ctor', () => {
 
     const ThroughCustomOptionsStream = ctor(name, transformObjWithCustomOptions)
 
-    const stream = new ThroughCustomOptionsStream({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const options: any = {
       objectMode: true,
       peek: true
-    })
+    }
+    const stream = new ThroughCustomOptionsStream(options)
     writeArrayToStream(data, stream)
     stream.end()
 

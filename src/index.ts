@@ -41,7 +41,7 @@ export default class Through2 extends Transform {
    */
   static make(
     this: void,
-    transform: _Transform,
+    transform: _Transform = (chunk, _, cb) => cb(null, chunk),
     options: TransformOptions = {},
     flush?: _Flush
   ): Through2 {
@@ -58,7 +58,7 @@ export default class Through2 extends Transform {
    */
   static obj(
     this: void,
-    transform: _Transform,
+    transform: _Transform = (chunk, _, cb) => cb(null, chunk),
     overrides: TransformOptions = {},
     flush?: _Flush
   ): Through2 {
