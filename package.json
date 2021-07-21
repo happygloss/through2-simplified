@@ -15,8 +15,8 @@
     "serve:docs": "http-server ./docs/",
     "format": "prettier --write '**/*.{json,ts,md}'",
     "info": "npm-scripts-info",
-    "lint": "eslint . --ext '.js,.ts'",
-    "lint:fix": "eslint . --ext '.js,.ts' --fix",
+    "lint": "eslint . --ext '.ts,.js'",
+    "lint:fix": "eslint . --ext '.ts,.js' --fix",
     "test": "jest --config jest.config.json"
   },
   "scripts-info": {
