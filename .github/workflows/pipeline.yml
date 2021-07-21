@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -34,3 +32,6 @@ jobs:
 
     - name: Run Tests
       run: yarn test
+
+    - name: Build package
+      run: yarn build

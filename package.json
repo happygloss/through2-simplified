@@ -1,7 +1,7 @@
 {
-  "name": "through2",
+  "name": "@happygloss/through2",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -44,6 +44,14 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "files": ["build"],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vamsiampolu/through2-simplified.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "prettier": "prettier-config-standard"
 }
