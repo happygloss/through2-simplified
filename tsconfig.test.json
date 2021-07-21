@@ -6,5 +6,5 @@
     "types": ["@types/node"]
   },
   "include": ["./test/", "./typings", "./src/"],
-  "exclude": []
+  "exclude": ["./docs"]
 }
