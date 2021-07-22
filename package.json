@@ -1,6 +1,6 @@
 {
   "name": "@happygloss/through2",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "type": "module",
   "main": "build/cjs/index.js",
