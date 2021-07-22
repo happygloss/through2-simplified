@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals'
+import { describe, it, expect } from '@jest/globals'
 import { Readable } from 'stream'
 import { ChunkHandler, ctor, make, obj, Through2Map } from '../src/map'
 import {
@@ -136,15 +136,12 @@ describe('Through2Map', () => {
   })
 
   it('passes the error to the event', (done) => {
-    const stream = make(yell as ChunkHandler<unknown>)
-
-    const mockErrorHandler = jest.fn()
-    stream.on('error', (error) => {
-      mockErrorHandler(error)
+    const stream = make(yell as ChunkHandler<unknown>, {
+      wantsStrings: false
     })
 
-    stream.on('close', () => {
-      expect(mockErrorHandler).toBeCalledWith(new Error('yell'))
+    stream.on('error', (error) => {
+      expect(error.message).toEqual('yell')
       done()
     })
 
