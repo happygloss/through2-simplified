@@ -66,8 +66,14 @@
     "build"
   ],
   "exports": {
-    "require": "./build/cjs/index.js",
-    "import": "./build/esm/index.js"
+    ".": {
+      "require": "./build/cjs/index.js",
+      "import": "./build/esm/index.js"
+    },
+    "./map": {
+      "require": "./build/cjs/map.js",
+      "import": "./build/esm/map.js"
+    }
   },
   "repository": {
     "type": "git",

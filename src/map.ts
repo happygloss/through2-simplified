@@ -83,18 +83,19 @@ export function transform<T>(
   _: BufferEncoding,
   callback: TransformCallback
 ): void {
-  if (this._index == null) this._index = 0
-
   let updatedChunk = chunk
   if (this.options.wantsStrings && Buffer.isBuffer(chunk)) {
     updatedChunk = chunk.toString()
   }
 
   const index = this._index + 1
-  const updated = this.fn(updatedChunk, index)
-
-  this.push(updated as Chunk)
-  callback()
+  try {
+    const updated = this.fn(updatedChunk, index)
+    this.push(updated as Chunk)
+    callback()
+  } catch (e) {
+    callback(e)
+  }
 }
 
 /**
