@@ -79,9 +79,9 @@ export function transform<T>(
     updatedChunk = chunk.toString()
   }
 
-  const index = this._index + 1
+  this._index = this._index + 1
   try {
-    const updated = this.fn(updatedChunk, index)
+    const updated = this.fn(updatedChunk, this._index)
     this.push(updated as Chunk)
     callback()
   } catch (e) {

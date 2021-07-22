@@ -1,4 +1,4 @@
-import { Duplex } from 'stream'
+import { Duplex, Readable } from 'stream'
 
 /**
  * @param {Duplex} sink duplex stream to extract the data from.
@@ -43,4 +43,23 @@ export function writeArrayToStream<T>(arr: T[], stream: Duplex): void {
   for (const value of arr) {
     stream.write(value)
   }
+}
+
+/**
+ * @description Create a readable stream with the data.
+ * @template T
+ * @param {T[]} arr Data to be provided by the Readable.
+ * @param {boolean} objectMode determines if the stream needs to be in object mode.
+ * @returns {Readable} a Readable stream that streams the data and ends.
+ */
+export function createSourceWithData<T = Record<string, unknown>>(
+  arr: T[],
+  objectMode = false
+): Readable {
+  const source = new Readable({
+    objectMode
+  })
+  arr.forEach((record: T) => source.push(record))
+  source.push(null)
+  return source
 }

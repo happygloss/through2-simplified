@@ -1,7 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import {
   PassThrough,
-  Readable,
   Transform,
   TransformCallback,
   TransformOptions
@@ -16,7 +15,8 @@ import {
   transform,
   transformObj,
   transformObjWithCustomOptions,
-  writeArrayToStream
+  writeArrayToStream,
+  createSourceWithData
 } from './helpers'
 
 export interface Temperature {
@@ -55,25 +55,6 @@ function temperatureConverter(
     })
   }
   callback()
-}
-
-/**
- * @description Create a readable stream with the data.
- * @template T
- * @param {T[]} arr Data to be provided by the Readable.
- * @param {boolean} objectMode determines if the stream needs to be in object mode.
- * @returns {Readable} a Readable stream that streams the data and ends.
- */
-function createSourceWithData<T = Record<string, unknown>>(
-  arr: T[],
-  objectMode = false
-): Readable {
-  const source = new Readable({
-    objectMode
-  })
-  arr.forEach((record: T) => source.push(record))
-  source.push(null)
-  return source
 }
 
 describe('ctor', () => {

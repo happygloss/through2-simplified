@@ -12,5 +12,6 @@ export {
 export {
   bufferStreamToArray as streamToArray,
   objectStreamToArray,
-  writeArrayToStream
+  writeArrayToStream,
+  createSourceWithData
 } from './stream-to-array'
