@@ -1,5 +1,5 @@
 import { TransformCallback, TransformOptions } from 'stream'
-import Through2, { BufferEncoding, _Flush, _Transform } from './index'
+import Through2, { BufferEncoding } from './index'
 
 export type Chunk = Buffer | string | Record<string, unknown>
 
@@ -7,15 +7,6 @@ export type ChunkHandler<T> = (this: Through2, chunk: Chunk, index: number) => T
 
 export interface Options extends TransformOptions {
   wantsStrings: boolean
-}
-
-export interface IThrough2Map<T> extends Through2 {
-  _index?: number
-  fn: ChunkHandler<T>
-  options: Options
-  _transform: _Transform
-  _flush: _Flush
-  push: (chunk: Chunk) => boolean
 }
 
 export class Through2Map<T> extends Through2 {
