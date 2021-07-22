@@ -1,6 +1,6 @@
 {
   "tsconfig": "./tsconfig.json",
-  "entryPoints": ["./src/index.ts"],
+  "entryPoints": ["./src/*.ts"],
   "out": "docs",
   "readme": "README.md",
   "plugin": "typedoc-neo-theme"

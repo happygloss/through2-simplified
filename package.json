@@ -73,6 +73,10 @@
     "./map": {
       "require": "./build/cjs/map.js",
       "import": "./build/esm/map.js"
+    },
+    "./filter": {
+      "require": "./build/cjs/filter.js",
+      "import": "./build/esm/filter.js"
     }
   },
   "repository": {
