@@ -12,7 +12,7 @@ import {
  * @description Only allows strings of length 3
  * @param {string} chunk Any string
  * @param {number} _ index
- * @returns {boolean}
+ * @returns {boolean} true if chunk is of length 3
  */
 function onlyLengthOfThree(chunk: string, _: number): boolean {
   return chunk.length === 3
