@@ -4,7 +4,7 @@ export type _Read = Readable['_read']
 
 export class Spigot extends Readable {
   private data: unknown[]
-  constructor(data: unknown[], options: ReadableOptions = {}) {
+  constructor(data: unknown[] = [], options: ReadableOptions = {}) {
     super(options)
     this.data = [...data]
   }

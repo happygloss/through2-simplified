@@ -1,6 +1,7 @@
-import { describe, it, expect } from '@jest/globals'
+import { describe, expect, it, jest } from '@jest/globals'
 import { Readable } from 'stream'
 import { ChunkHandler, ctor, make, obj, Through2Map } from '../src/map'
+import spigot from '../src/spigot'
 import {
   objectStreamToArray,
   streamToArray,
@@ -42,6 +43,18 @@ function objShout(
  */
 function yell(_1: unknown, _2: number): unknown {
   throw new Error('yell')
+}
+
+/**
+ * @description Doubles the number
+ * @param {Buffer} chunk A chunk
+ * @param {number} _ index
+ * @returns {string} Doubles the number and converts it to a string
+ */
+function double(chunk: Buffer, _: number): string {
+  const str = chunk.toString()
+  const num = Number.parseInt(str)
+  return `${num * 2}`
 }
 
 describe('Through2Map', () => {
@@ -147,5 +160,20 @@ describe('Through2Map', () => {
 
     stream.write('more shouting')
     stream.end()
+  })
+
+  it('reads from spigot and maps the array of data', async () => {
+    jest.useFakeTimers('legacy')
+
+    const source = spigot(['1', '2', '3', '4', '5'])
+    const stream = make(double as ChunkHandler<string>)
+
+    source.pipe(stream)
+    jest.runAllImmediates()
+
+    const actual = await streamToArray(stream)
+    jest.useRealTimers()
+
+    expect(actual).toEqual(['2', '4', '6', '8', '10'])
   })
 })
