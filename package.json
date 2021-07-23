@@ -77,6 +77,10 @@
     "./filter": {
       "require": "./build/cjs/filter.js",
       "import": "./build/esm/filter.js"
+    },
+    "./spigot": {
+      "require": "./build/cjs/spigot.js",
+      "import": "./build/esm/spigot.js"
     }
   },
   "repository": {
