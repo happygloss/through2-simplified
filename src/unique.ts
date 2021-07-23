@@ -48,6 +48,7 @@ export default class UniqueFilter<T> extends Through2Filter {
   }
 
   /**
+   * @template T
    * @description Unique Filter
    * @param {UniqueChunk<T>} chunk A chunk is either string or an object. Buffers would have to be converted to a string.
    * @returns {boolean} Returns false if the chunk must be skipped.
