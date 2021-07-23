@@ -76,6 +76,29 @@
 				<a href="#through2-simplified" id="through2-simplified" style="color: inherit; text-decoration: none;">
 					<h1>through2-simplified</h1>
 				</a>
+				<p><strong>Installation</strong></p>
+				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> @</span><span style="color: #001080">happygloss</span><span style="color: #000000">/</span><span style="color: #001080">through2</span>
+</code></pre>
+				<p><strong>Usage</strong></p>
+				<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Through2</span><span style="color: #000000">, {</span><span style="color: #001080">BufferEncoding</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@happygloss/through2&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TransformCallback</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;stream&#039;</span>
+
+<span style="color: #008000">// unknown is a type-safe variant of any, provide the this context as a type param.</span>
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">transform</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">: </span><span style="color: #267F99">Through2</span><span style="color: #000000">, </span><span style="color: #001080">chunk</span><span style="color: #000000">: </span><span style="color: #267F99">unknown</span><span style="color: #000000">, </span><span style="color: #001080">enc</span><span style="color: #000000">: </span><span style="color: #267F99">BufferEncoding</span><span style="color: #000000">, </span><span style="color: #001080">callback</span><span style="color: #000000">: </span><span style="color: #267F99">TransformCallback</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">updated</span><span style="color: #000000"> = </span><span style="color: #001080">chunk</span><span style="color: #000000">.</span><span style="color: #795E26">toString</span><span style="color: #000000">() + </span><span style="color: #A31515">&#039;!&#039;</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #001080">updated</span><span style="color: #000000">)</span>
+<span style="color: #000000">  </span><span style="color: #795E26">callback</span><span style="color: #000000">()</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">through2</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Through2</span><span style="color: #000000">(</span><span style="color: #001080">transform</span><span style="color: #000000">)</span>
+</code></pre>
+				<p><strong>Development</strong></p>
+				<p>We use <code>Readable</code> and <code>Transform</code> streams when testing the code, we don&#39;t rely on other modules such as spigot, from, concat when testing. To test the code, use:</p>
+				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+</code></pre>
+				<p>To run tests with coverage:</p>
+				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">cover</span>
+</code></pre>
 			</div>
 			<!--{&quot;options&quot;:&quot;/Users/localuser/Lendi/random-hacks/through2/typedoc.json&quot;,&quot;tsconfig&quot;:&quot;/Users/localuser/Lendi/random-hacks/through2/tsconfig.json&quot;,&quot;packages&quot;:[],&quot;entryPoints&quot;:[&quot;/Users/localuser/Lendi/random-hacks/through2/src/*.ts&quot;],&quot;exclude&quot;:[],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;/Users/localuser/Lendi/random-hacks/through2/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:false,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;/Users/localuser/Lendi/random-hacks/through2/README.md&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;sort&quot;:[&quot;kind&quot;,&quot;instance-first&quot;,&quot;alphabetical&quot;],&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[&quot;typedoc-neo-theme&quot;],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;treatWarningsAsErrors&quot;:false,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>

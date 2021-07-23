@@ -34,6 +34,20 @@ describe('Spigot', () => {
 
   it('makes an array of data available to consumers', async () => {
     const source = new Spigot(['A', 'B', 'C'])
+    expect(source.getData()).toEqual(['A', 'B', 'C'])
+    const sink = new PassThrough()
+    source.pipe(sink)
+
+    jest.runAllImmediates()
+    const actual = await streamToArray(sink)
+    expect(actual).toEqual(['A', 'B', 'C'])
+  })
+
+  it('makes an array of data available to consumers', async () => {
+    const data = ['A', 'B', 'C']
+    const source = new Spigot()
+    source.setData(data)
+
     const sink = new PassThrough()
     source.pipe(sink)
 

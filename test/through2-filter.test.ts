@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals'
 import { Readable } from 'stream'
 import Through2Filter, { ctor, make, obj } from '../src/filter'
 import { ChunkHandler, Options } from '../src/map'
+import spigot from '../src/spigot'
 import {
   streamToArray,
   objectStreamToArray,
@@ -110,6 +111,18 @@ describe('filter', () => {
 
     const [actual] = await streamToArray(stream)
     expect(actual).toEqual('foobartwo')
+  })
+
+  it('reads from a spigot stream and filters any strings that dont have a length of 3', async () => {
+    const source = spigot(['dark', 'hero', 'core', 'four', 'foo', 'bar', 'two'])
+    const sink = make(onlyLengthOfThree as ChunkHandler<boolean>, {
+      wantsStrings: true
+    })
+
+    source.pipe(sink)
+
+    const actual = await streamToArray(sink)
+    expect(actual).toEqual(['foo', 'bar', 'two'])
   })
 
   it('creates a Transform stream that only skips chunks with skip: true', async () => {
