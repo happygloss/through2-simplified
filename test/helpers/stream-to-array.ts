@@ -1,4 +1,5 @@
 import { Duplex, Readable } from 'stream'
+import { types } from 'util'
 
 /**
  * @param {Duplex} sink duplex stream to extract the data from.
@@ -8,8 +9,11 @@ export async function bufferStreamToArray(sink: Duplex): Promise<string[]> {
   const arr: string[] = []
 
   for await (const chunk of sink) {
-    const str = (chunk as Uint8Array | Buffer).toString('ascii')
-    arr.push(str)
+    if (Buffer.isBuffer(chunk) || types.isUint8Array(chunk)) {
+      arr.push(chunk.toString('ascii'))
+    } else {
+      arr.push(chunk)
+    }
   }
 
   return arr
