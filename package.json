@@ -82,6 +82,10 @@
     "./spigot": {
       "require": "./build/cjs/spigot.js",
       "import": "./build/esm/spigot.js"
+    },
+    "./unique": {
+      "require": "./build/cjs/unique.js",
+      "import": "./build/esm/unique.js"
     }
   },
   "repository": {
