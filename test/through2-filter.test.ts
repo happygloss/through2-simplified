@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 import { Readable } from 'stream'
-import Through2Filter, { ctor, make, obj } from '../src/filter'
-import { ChunkHandler, Options } from '../src/map'
+import Through2Filter, { ctor, make, obj, Predicate } from '../src/filter'
+import { Options } from '../src/map'
 import spigot from '../src/spigot'
 import {
   streamToArray,
@@ -106,7 +106,7 @@ describe('filter', () => {
     readable.push(null)
 
     const options: Options = { wantsStrings: false }
-    const stream = make(onlyLengthOfThree as ChunkHandler<boolean>, options)
+    const stream = make(onlyLengthOfThree as Predicate, options)
     readable.pipe(stream)
 
     const [actual] = await streamToArray(stream)
@@ -115,7 +115,7 @@ describe('filter', () => {
 
   it('reads from a spigot stream and filters any strings that dont have a length of 3', async () => {
     const source = spigot(['dark', 'hero', 'core', 'four', 'foo', 'bar', 'two'])
-    const sink = make(onlyLengthOfThree as ChunkHandler<boolean>, {
+    const sink = make(onlyLengthOfThree as Predicate, {
       wantsStrings: true
     })
 
@@ -144,7 +144,7 @@ describe('filter', () => {
 
     const source = createSourceWithData(data, true)
 
-    const stream = obj(skipOnRequest as unknown as ChunkHandler<boolean>)
+    const stream = obj(skipOnRequest as unknown as Predicate)
     source.pipe(stream)
 
     const actual = await objectStreamToArray(stream)
@@ -152,7 +152,7 @@ describe('filter', () => {
   })
 
   it('passes the error to the event', (done) => {
-    const stream = make(yell as ChunkHandler<boolean>, {
+    const stream = make(yell as Predicate, {
       wantsStrings: false
     })
 

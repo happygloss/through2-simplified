@@ -1,4 +1,5 @@
 import { TransformCallback, TransformOptions } from 'stream'
+import { Buffer } from 'buffer'
 import Through2, { BufferEncoding } from './index'
 
 export type NonObjectChunk = Buffer | string | Uint8Array

@@ -2,18 +2,7 @@ import { Transform, TransformOptions } from 'stream'
 
 export type _Transform = Transform['_transform']
 export type _Flush = Transform['_flush']
-export type BufferEncoding =
-  | 'ascii'
-  | 'utf8'
-  | 'utf-8'
-  | 'utf16le'
-  | 'ucs2'
-  | 'ucs-2'
-  | 'base64'
-  | 'base64url'
-  | 'latin1'
-  | 'binary'
-  | 'hex'
+export type BufferEncoding = NonNullable<Parameters<typeof Buffer.from>[1]>
 
 export default class Through2 extends Transform {
   constructor(

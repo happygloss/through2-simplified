@@ -6,7 +6,7 @@
  * @returns {T[]} An array with the value repeated n times.
  */
 export function fill<T>(value: T, times: number): T[] {
-  return Array.from({ length: times }, () => value)
+  return Array.from<T>({ length: times }).fill(value)
 }
 
 /**
