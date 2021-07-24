@@ -86,6 +86,10 @@
     "./unique": {
       "require": "./build/cjs/unique.js",
       "import": "./build/esm/unique.js"
+    },
+    "./reduce": {
+      "require": "./build/cjs/reduce.js",
+      "import": "./build/esm/reduce.js"
     }
   },
   "repository": {
