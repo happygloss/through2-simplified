@@ -1,20 +1,27 @@
 import { TransformCallback, TransformOptions } from 'stream'
 import Through2, { BufferEncoding } from './index'
 
-export type Chunk = Buffer | string | Record<string, unknown>
+export type NonObjectChunk = Buffer | string | Uint8Array
+export type ObjectChunk = unknown
 
-export type ChunkHandler<T> = (this: Through2, chunk: Chunk, index: number) => T
+export type Chunk = NonObjectChunk | ObjectChunk
+
+export type ChunkHandler = (
+  this: Through2,
+  chunk: Chunk,
+  index: number
+) => Chunk
 
 export interface Options extends TransformOptions {
   wantsStrings: boolean
 }
 
-export class Through2Map<T> extends Through2 {
-  fn: ChunkHandler<T>
+export class Through2Map extends Through2 {
+  fn: ChunkHandler
   _index: number
   override options: Options
   constructor(
-    fn: ChunkHandler<T> = (x: Chunk, _: number) => x as T,
+    fn: ChunkHandler = (x: Chunk, _: number) => x,
     options: Options = { wantsStrings: false }
   ) {
     const { wantsStrings, ...transformOptions } = options
@@ -37,10 +44,10 @@ export type Through2MapConstructor = typeof Through2Map
  * @returns {Through2Map} instance of Through2Map
  */
 export function make(
-  fn: ChunkHandler<unknown> = (x: Chunk, _: number) => x,
+  fn: ChunkHandler = (x: Chunk, _: number) => x,
   options: Options = { wantsStrings: false }
-): Through2Map<unknown> {
-  return new Through2Map<unknown>(fn, options)
+): Through2Map {
+  return new Through2Map(fn, options)
 }
 
 /**
@@ -50,26 +57,25 @@ export function make(
  * @returns {Through2Map} instance of Through2Map running in object mode.
  */
 export function obj(
-  fn: ChunkHandler<unknown> = (x: Chunk, _: number) => x,
+  fn: ChunkHandler = (x: Chunk, _: number) => x,
   options: Options = {
     wantsStrings: false,
     objectMode: true,
     highWaterMark: 16
   }
-): Through2Map<unknown> {
-  return new Through2Map<unknown>(fn, options)
+): Through2Map {
+  return new Through2Map(fn, options)
 }
 
 /**
  * @description Transform for Through2Map.
- * @template T
- * @param {Through2Map<T>} this Context is Through2Map.
+ * @param {Through2Map} this Context is Through2Map.
  * @param {Chunk} chunk Chunk received.
  * @param {BufferEncoding} _ unused encoding parameter
  * @param {TransformCallback} callback Callback
  */
-export function transform<T>(
-  this: Through2Map<T>,
+export function transform(
+  this: Through2Map,
   chunk: Chunk,
   _: BufferEncoding,
   callback: TransformCallback
@@ -82,7 +88,7 @@ export function transform<T>(
   this._index = this._index + 1
   try {
     const updated = this.fn(updatedChunk, this._index)
-    this.push(updated as Chunk)
+    this.push(updated)
     callback()
   } catch (e) {
     callback(e)
@@ -98,10 +104,10 @@ export function transform<T>(
  */
 export function ctor(
   name: string,
-  fn: ChunkHandler<unknown> = (x: Chunk, _: number) => x,
+  fn: ChunkHandler = (x: Chunk, _: number) => x,
   ctorOptions: Options = { wantsStrings: false }
 ): Through2MapConstructor {
-  const c = class extends Through2Map<unknown> {
+  const c = class extends Through2Map {
     constructor(overrides: Options = { wantsStrings: false }) {
       const updatedOptions = { ...ctorOptions, ...overrides }
       super(fn, updatedOptions)

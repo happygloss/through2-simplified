@@ -1,6 +1,6 @@
 import stringify from 'fast-json-stable-stringify'
-import Through2Filter from './filter'
-import { ChunkHandler, Options } from './map'
+import Through2Filter, { Predicate } from './filter'
+import { Options } from './map'
 
 export type UniqueChunk<T> = string | Record<string, T>
 export type UniqueChunkPropData<T> = string | T
@@ -28,7 +28,7 @@ export default class UniqueFilter<T> extends Through2Filter {
   ) {
     super(() => true, options)
     this.options = options
-    this.fn = this.uniqueFilter as ChunkHandler<boolean>
+    this.fn = this.uniqueFilter as Predicate
   }
 
   getKeyStore(): Set<T> {

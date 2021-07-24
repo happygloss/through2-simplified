@@ -63,7 +63,7 @@ describe('Through2Map', () => {
     readable.push('foo')
     readable.push(null)
 
-    const stream: Through2Map<string> = new Through2Map()
+    const stream: Through2Map = new Through2Map()
     stream.options.wantsStrings = true
 
     readable.pipe(stream)
@@ -109,7 +109,7 @@ describe('Through2Map', () => {
   })
 
   it('creates a TransformStream that converts strings to uppercase', async () => {
-    const stream = make(shout as ChunkHandler<string>, { wantsStrings: true })
+    const stream = make(shout as ChunkHandler, { wantsStrings: true })
     stream.write('dog')
     stream.write('cat')
     stream.end('mouse')
@@ -119,7 +119,7 @@ describe('Through2Map', () => {
   })
 
   it('creates a TransformStream that converts object keys to uppercase', async () => {
-    const stream = obj(objShout as ChunkHandler<Record<string, string>>)
+    const stream = obj(objShout as ChunkHandler)
     writeArrayToStream(
       [
         {
@@ -149,7 +149,7 @@ describe('Through2Map', () => {
   })
 
   it('passes the error to the event', (done) => {
-    const stream = make(yell as ChunkHandler<unknown>, {
+    const stream = make(yell as ChunkHandler, {
       wantsStrings: false
     })
 
@@ -166,7 +166,7 @@ describe('Through2Map', () => {
     jest.useFakeTimers('legacy')
 
     const source = spigot(['1', '2', '3', '4', '5'])
-    const stream = make(double as ChunkHandler<string>)
+    const stream = make(double as ChunkHandler)
 
     source.pipe(stream)
     jest.runAllImmediates()

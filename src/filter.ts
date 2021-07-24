@@ -1,13 +1,15 @@
 import { TransformCallback } from 'stream'
 import Through2, { BufferEncoding } from './index'
-import { Chunk, ChunkHandler, Options } from './map'
+import { Chunk, Options } from './map'
+
+export type Predicate = (chunk: Chunk, index: number) => boolean
 
 export default class Through2Filter extends Through2 {
   _index: number
-  fn: ChunkHandler<boolean>
+  fn: Predicate
   override options: Options
   constructor(
-    fn: ChunkHandler<boolean> = (_1: Chunk, _2: number) => true,
+    fn: Predicate = (_1: Chunk, _2: number) => true,
     options: Options = { wantsStrings: false }
   ) {
     const { wantsStrings, ...transformOptions } = options
@@ -53,12 +55,12 @@ export function transform(
 
 /**
  * @description Creates a Through2Filter
- * @param {ChunkHandler<boolean>} fn A function that determines if a chunk needs to be dropped.
+ * @param {Predicate} fn A function that determines if a chunk needs to be dropped.
  * @param {Options} options Options
  * @returns {Through2Filter} Through2Filter.
  */
 export function make(
-  fn: ChunkHandler<boolean> = (_1: unknown, _2: number) => true,
+  fn: Predicate = (_1: unknown, _2: number) => true,
   options: Options = { wantsStrings: false }
 ): Through2Filter {
   return new Through2Filter(fn, options)
@@ -66,12 +68,12 @@ export function make(
 
 /**
  * @description Creates a Through2Filter running in object mode.
- * @param {ChunkHandler<boolean>} fn A function that determines if a chunk needs to be dropped.
+ * @param {Predicate} fn A function that determines if a chunk needs to be dropped.
  * @param {Options} options Options
  * @returns {Through2Filter} Through2Filter.
  */
 export function obj(
-  fn: ChunkHandler<boolean> = (_1: unknown, _2: number) => true,
+  fn: Predicate = (_1: unknown, _2: number) => true,
   options: Options = {
     wantsStrings: false,
     objectMode: true,
@@ -86,13 +88,13 @@ type Through2FilterConstructor = typeof Through2Filter
 /**
  * @description Creates a dynamic subclass of Through2Filter
  * @param {string} name Name of the subclass
- * @param {ChunkHandler<boolean>} fn A function that determines if a chunk needs to be dropped.
+ * @param {Predicate} fn A function that determines if a chunk needs to be dropped.
  * @param {Options} options Options
  * @returns {Through2FilterConstructor} Through2Filter subclass constructor
  */
 export function ctor(
   name: string,
-  fn: ChunkHandler<boolean> = (_1: unknown, _2: number) => true,
+  fn: Predicate = (_1: unknown, _2: number) => true,
   options: Options = {
     wantsStrings: false
   }
