@@ -34,8 +34,8 @@
   "devDependencies": {
     "@jest/globals": "^27.0.6",
     "@types/node": "^16.3.3",
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "bl": "^5.0.0",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
@@ -61,7 +61,8 @@
   },
   "dependencies": {
     "fast-json-stable-stringify": "^2.1.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "utf-8": "^2.0.0"
   },
   "files": [
     "build"
@@ -90,6 +91,10 @@
     "./reduce": {
       "require": "./build/cjs/reduce.js",
       "import": "./build/esm/reduce.js"
+    },
+    "./concat": {
+      "require": "./build/cjs/concat.js",
+      "import": "./build/esm/concat.js"
     }
   },
   "repository": {
