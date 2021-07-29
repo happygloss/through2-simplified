@@ -1,6 +1,6 @@
 import { TransformCallback, TransformOptions } from 'stream'
 import { Buffer } from 'buffer'
-import Through2, { BufferEncoding } from './index'
+import Through2, { BufferEncoding } from './through2'
 
 export type NonObjectChunk = Buffer | string | Uint8Array
 export type ObjectChunk = unknown
@@ -17,7 +17,7 @@ export interface Options extends TransformOptions {
   wantsStrings: boolean
 }
 
-export class Through2Map extends Through2 {
+export default class Through2Map extends Through2 {
   fn: ChunkHandler
   _index: number
   override options: Options

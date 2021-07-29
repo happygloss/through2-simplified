@@ -7,7 +7,7 @@ import {
   jest
 } from '@jest/globals'
 import { PassThrough } from 'stream'
-import spigot, { Spigot } from '../src/spigot'
+import Spigot, { spigot } from '../src/spigot'
 import { objectStreamToArray, streamToArray } from './helpers'
 
 describe('Spigot', () => {

@@ -1,5 +1,5 @@
 import { TransformCallback } from 'stream'
-import Through2, { BufferEncoding } from './index'
+import Through2, { BufferEncoding } from './through2'
 import { Chunk, Options } from './map'
 
 export type Predicate = (chunk: Chunk, index: number) => boolean

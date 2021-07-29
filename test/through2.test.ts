@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import { PassThrough, TransformCallback, TransformOptions } from 'stream'
-import Through2, { BufferEncoding } from '../src'
+import Through2, { BufferEncoding } from '../src/through2'
 import {
   Chunk,
   fillString,

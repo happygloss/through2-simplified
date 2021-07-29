@@ -2,7 +2,7 @@ import { Readable, ReadableOptions } from 'stream'
 
 export type _Read = Readable['_read']
 
-export class Spigot extends Readable {
+export default class Spigot extends Readable {
   private data: unknown[]
   constructor(data: unknown[] = [], options: ReadableOptions = {}) {
     super(options)
@@ -35,9 +35,6 @@ export class Spigot extends Readable {
  * @param {ReadableOptions} options Readable stream options
  * @returns {Spigot} A Readable Stream
  */
-export default function spigot(
-  data: unknown[],
-  options: ReadableOptions = {}
-): Spigot {
+export function spigot(data: unknown[], options: ReadableOptions = {}): Spigot {
   return new Spigot(data, options)
 }

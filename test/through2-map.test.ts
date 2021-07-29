@@ -1,7 +1,7 @@
 import { describe, expect, it, jest } from '@jest/globals'
 import { Readable } from 'stream'
-import { ChunkHandler, ctor, make, obj, Through2Map } from '../src/map'
-import spigot from '../src/spigot'
+import Through2Map, { ChunkHandler, ctor, make, obj } from '../src/map'
+import { spigot } from '../src/spigot'
 import {
   objectStreamToArray,
   streamToArray,

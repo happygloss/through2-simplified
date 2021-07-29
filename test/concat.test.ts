@@ -5,7 +5,7 @@ import ConcatStream, { Callback, concatWithCallback } from '../src/concat'
 import { ConcatStreamEncoding } from '../src/utils'
 
 import { exec as execCb, spawn } from 'child_process'
-import spigot from '../src/spigot'
+import { spigot } from '../src/spigot'
 import UniqueFilter from '../src/unique'
 
 const finished = promisify(finishedCb)

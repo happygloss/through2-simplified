@@ -1,6 +1,6 @@
 import { expect } from '@jest/globals'
 import { Transform, TransformCallback } from 'stream'
-import Through2, { BufferEncoding } from '../../src'
+import Through2, { BufferEncoding } from '../../src/through2'
 import { TestThrough2 } from './test-through2'
 
 export interface UnderscoreI {

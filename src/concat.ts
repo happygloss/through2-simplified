@@ -1,5 +1,5 @@
 import { Writable, WritableOptions } from 'stream'
-import { BufferEncoding } from '.'
+import { BufferEncoding } from './through2'
 import {
   bufferConcat,
   ConcatStreamEncoding,

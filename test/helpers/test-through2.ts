@@ -1,5 +1,5 @@
 import { TransformOptions } from 'stream'
-import Through2, { _Transform, _Flush } from '../../src'
+import Through2, { _Transform, _Flush } from '../../src/through2'
 
 export class TestThrough2 extends Through2 {
   // represents the ASCII code for a

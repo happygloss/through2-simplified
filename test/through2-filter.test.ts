@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals'
 import { Readable } from 'stream'
 import Through2Filter, { ctor, make, obj, Predicate } from '../src/filter'
 import { Options } from '../src/map'
-import spigot from '../src/spigot'
+import { spigot } from '../src/spigot'
 import {
   streamToArray,
   objectStreamToArray,

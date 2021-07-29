@@ -1,5 +1,5 @@
 import { describe, expect, it, jest } from '@jest/globals'
-import spigot from '../src/spigot'
+import { spigot } from '../src/spigot'
 import UniqueFilter, { make, obj } from '../src/unique'
 import {
   createSourceWithData,

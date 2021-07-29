@@ -5,7 +5,7 @@ import {
   TransformCallback,
   TransformOptions
 } from 'stream'
-import Through2, { ctor, BufferEncoding } from '../src'
+import Through2, { ctor, BufferEncoding } from '../src/through2'
 import {
   ctorTransform,
   fillString,

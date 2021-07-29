@@ -6,7 +6,7 @@ import {
   it,
   jest
 } from '@jest/globals'
-import spigot from '../src/spigot'
+import { spigot } from '../src/spigot'
 import Through2Reduce, { make, obj, Reducer } from '../src/reduce'
 import {
   createSourceWithData,

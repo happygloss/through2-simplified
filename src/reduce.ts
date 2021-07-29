@@ -1,5 +1,5 @@
 import { Transform, TransformCallback } from 'stream'
-import { BufferEncoding } from '.'
+import { BufferEncoding } from './through2'
 import { Chunk, Options } from './map'
 
 export type Reducer = (acc: Chunk, value: Chunk, index: number) => Chunk
