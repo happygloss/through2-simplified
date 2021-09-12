@@ -29,29 +29,8 @@ jobs:
 
       - name: Build package
         run: yarn build
-  
+
   publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@happygloss'
-      - name: Install all dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Publish to Github Package Registry
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     permissions:
