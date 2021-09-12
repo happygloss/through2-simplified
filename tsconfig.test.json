@@ -3,6 +3,7 @@
   "compilerOptions": {
     "checkJs": true,
     "allowJs": true,
+    "sourceMap": true,
     "types": ["@types/node"]
   },
   "include": ["./test/", "./typings", "./src/"],

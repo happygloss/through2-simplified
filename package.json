@@ -101,8 +101,5 @@
     "type": "git",
     "url": "git@github.com:happygloss/through2-simplified.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "prettier": "prettier-config-standard"
 }
