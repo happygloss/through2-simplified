@@ -101,5 +101,6 @@
     "type": "git",
     "url": "git@github.com:happygloss/through2-simplified.git"
   },
+  "private": false,
   "prettier": "prettier-config-standard"
 }
